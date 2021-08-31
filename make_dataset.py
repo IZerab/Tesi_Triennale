@@ -11,6 +11,7 @@ Script filled with functions useful towards the importation and creation of data
 ##Paths per muoversi in cookiecutter
 
 data_path_in = Path('data/raw')
+data_path_pol = Path('data/raw/Inquinanti')
 
 data_path_out = Path('data/processed')
 
@@ -48,6 +49,38 @@ def safe_import(inp):
     print("SafeImport_Output:  ", out.keys())
 
     return out
+
+def list_in_directory (path):
+    """
+    This function acquires the name of all the files in a given directory. it returns a list
+    """
+    from os import listdir
+    from os.path import isfile, join
+    onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]
+    return onlyfiles
+
+
+def Aquirer(inp):
+    """
+    This function aquires the data from the server, data must be a csv format
+    """
+    filename = files[inp][0]
+    filetype = files[inp][1]
+
+    fl = data_path_in / filename
+    data = pd.read_csv(fl, encoding='latin-1', engine='python', decimal='.')
+    data.columns = data.columns.str.replace('[()]', '', regex=True)
+    data = data.replace('[()]', '', regex=True)
+    data.dropna(inplace = True)
+
+    labels = data.columns
+    print("The columns of the data set are: ", labels)
+    return data
+
+
+
+
+
 
 
 def appforth(df, line):

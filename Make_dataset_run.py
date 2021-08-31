@@ -19,32 +19,27 @@ Python script that imports all the data necessary and
 """
 
 ################# IMPORT #####################
-## Grid
-"""
-I manually create a grid in Geopandas to visualize the stations
-"""
-
-temp0 = pd.DataFrame({'Stazione': ["Trento Via Bolzano", "Ala A22","Piana Rotaliana","Trento Santa Chiara", "Borgo Valsugana", "Riva","Monte Gazza" ]
+# Grid
+grid=m_d.safe_import("grid")
+grid = grid.dissolve()
+# I manually create a grid in Geopandas to visualize the stations
+temp0 = pd.DataFrame({'Stazione': ["Trento Via Bolzano", "Ala A22","Piana Rotaliana","Trento Santa Chiara",
+                                   "Borgo Valsugana", "Riva","Monte Gazza" ],
      'Latitude': [46.105203, 45.752930, 46.228491, 46.063372, 46.053536, 45.884969, 46.083194],
      'Longitude': [11.109609, 10.990463, 11.131387, 11.126240, 11.456231, 10.837531, 10.990770]
      })
 gdf = geopandas.GeoDataFrame(
     temp0, geometry=geopandas.points_from_xy(temp0.Longitude, temp0.Latitude))
-world = geopandas.read_file(geopandas.datasets.get_path('naturalearth_lowres'))
-# We restrict to Europe.
-world = world[world.continent == 'Europe']
-ax = world[world.name == 'Italy'].plot(
-    color='white', edgecolor='black')
+base = grid.plot(color='white', edgecolor='black')
 # We can now plot our ``GeoDataFrame``.
-gdf.plot(ax=ax, color='red')
-plt.show()
-### Weather ###
-weather_json = json.load(open(m_d.data_path_in / m_d.files['weather'][0]))
-weather = gpd.GeoDataFrame(weather_json['features'])
+gdf.plot(ax=base, color='red')
 
-# Elimino le colonne del vento (dati molto incompleti)
-weather.drop(weather.columns[list(range(202, 298))], axis=1, inplace=True)
-weather.drop(columns=['minWind', "maxWind"], inplace=True)
+
+
+# I acquire pollutants
+
+
+
 
 # Svolgiamo infine i punti geometrici
 weather['geometry'] = weather['geomPoint.geom'].apply(lambda x: Point(x['coordinates'][0], x['coordinates'][1]))
