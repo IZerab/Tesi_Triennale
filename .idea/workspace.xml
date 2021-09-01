@@ -2,12 +2,35 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="588e50e0-f1e8-4d48-b00a-d1b958376b63" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data_Acquirer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Junk/Debog.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Junk/Profile_Borgo Valsugana.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Junk/Profile_Parco S. Chiara.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Junk/Profile_Piana Rotaliana.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Junk/Profile_Riva del Garda.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Junk/Profile_Rovereto.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Junk/Profile_Via Bolzano.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Junk/Untitled.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Junk/Untitled1.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Junk/Untitled2.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/old/ML_pipelines.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/old/threshold.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data_Aquirer.py" beforeDir="false" afterPath="$PROJECT_DIR$/Data_Aquirer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Make_dataset_run.py" beforeDir="false" afterPath="$PROJECT_DIR$/Make_dataset_run.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data_Aquirer.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Debog.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ML_pipelines.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Profile_Borgo Valsugana.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Profile_Parco S. Chiara.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Profile_Piana Rotaliana.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Profile_Riva del Garda.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Profile_Rovereto.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Profile_Via Bolzano.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Untitled.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Untitled1.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Untitled2.ipynb" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Untitled3.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Untitled3.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/make_dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/make_dataset.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/threshold.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,12 +51,15 @@
     <setting file="file://$USER_HOME$/anaconda3/envs/Tesi/Lib/site-packages/scrapy/spiders/__init__.py" root0="SKIP_INSPECTION" />
   </component>
   <component name="ProjectId" id="1sR3dJoOAlSeucdgC5ka5OwoN8i" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
@@ -89,6 +115,10 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

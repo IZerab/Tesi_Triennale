@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import geopandas as gpd
+import os
 
 from pathlib import Path
 
@@ -11,7 +12,7 @@ Script filled with functions useful towards the importation and creation of data
 ##Paths per muoversi in cookiecutter
 
 data_path_in = Path('data/raw')
-data_path_pol = Path('data/raw/Inquinanti')
+data_path_pollutants = Path('data/raw/Inquinanti')
 
 data_path_out = Path('data/processed')
 
@@ -25,6 +26,7 @@ files = {'grid':['trentino_grid.geojson',"geojson"],
         'direction':['Direzione.csv',"csv"],
         'pressure':['Pressione.csv',"csv"],
         'temperature':['Temperatura.csv',"csv"],
+        'path_pollutants': data_path_pollutants
         }
 
 
@@ -50,14 +52,12 @@ def safe_import(inp):
 
     return out
 
-def list_in_directory (path):
+def list_in_directory(mypath):
     """
     This function acquires the name of all the files in a given directory. it returns a list
     """
-    from os import listdir
-    from os.path import isfile, join
-    onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]
-    return onlyfiles
+    arr = os.listdir(files[mypath])
+    return arr
 
 
 def Aquirer(inp):
