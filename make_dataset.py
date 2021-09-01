@@ -13,6 +13,7 @@ Script filled with functions useful towards the importation and creation of data
 
 data_path_in = Path('data/raw')
 data_path_pollutants = Path('data/raw/Inquinanti')
+data_path_meteo = Path('data/raw/Meteo')
 
 data_path_out = Path('data/processed')
 
@@ -20,13 +21,14 @@ data_path_out = Path('data/processed')
 
 files = {'grid':['trentino_grid.geojson',"geojson"],
         'rain':['Pioggia.csv',"csv"],
-        'speed':['Velocità.csv.csv',"csv"],
-        'humidity':['Umidità.csv.csv',"csv"],
+        'speed':['Velocità.csv',"csv"],
+        'humidity':['Umidità.csv',"csv"],
         'radiation':['Radiazione.csv',"csv"],
         'direction':['Direzione.csv',"csv"],
         'pressure':['Pressione.csv',"csv"],
         'temperature':['Temperatura.csv',"csv"],
-        'path_pollutants': data_path_pollutants
+        'path_pollutants': data_path_pollutants,
+        'path_meteo': data_path_meteo
         }
 
 
@@ -62,10 +64,9 @@ def list_in_directory(mypath):
 
 def Aquirer(inp):
     """
-    This function aquires the data from the server, data must be a csv format
+    This function gets data in csv format and cleans them from thing that make the alg crash
     """
     filename = files[inp][0]
-    filetype = files[inp][1]
 
     fl = data_path_in / filename
     data = pd.read_csv(fl, encoding='latin-1', engine='python', decimal='.')
@@ -77,7 +78,23 @@ def Aquirer(inp):
     print("The columns of the data set are: ", labels)
     return data
 
+def Aquirer_meteo(data_path, inp):
+    """
+    This function gets data in csv format and cleans them from thing that make the alg crash.
+    It is specifically made to acquire data nested in folders and sub folders.
+    It needs a path as an argument (Better given using pathlib.Path)
+    """
+    filename = files[inp][0]
 
+    fl = data_path / filename
+    data = pd.read_csv(fl, encoding='latin-1', engine='python', decimal='.')
+    data.columns = data.columns.str.replace('[()]', '', regex=True)
+    data = data.replace('[()]', '', regex=True)
+    data.dropna(inplace = True)
+
+    labels = data.columns
+    print("You just added this feature ", labels[1], "to the DF")
+    return data
 
 
 
