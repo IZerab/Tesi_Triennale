@@ -4,35 +4,6 @@
     <list default="true" id="588e50e0-f1e8-4d48-b00a-d1b958376b63" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Untitled3.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Untitled3.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/raw/Ala/Direzione.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/raw/Ala/Pioggia.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/raw/Ala/Pressione.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/raw/Ala/Radiazione.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/raw/Ala/Temperatura.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/raw/Ala/Umidità.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/raw/Ala/Velocità.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/raw/Riva/Direzione.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/raw/Riva/Pioggia.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/raw/Riva/Pressione.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/raw/Riva/Radiazione.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/raw/Riva/Temperatura.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/raw/Riva/Umidità.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/raw/Riva/Velocità.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/raw/Rovereto/Direzione.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/raw/Rovereto/Pioggia.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/raw/Rovereto/Pressione.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/raw/Rovereto/Radiazione.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/raw/Rovereto/Temperatura.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/raw/Rovereto/Umidità.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/raw/Rovereto/Velocità.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/raw/Trento/Direzione.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/raw/Trento/Pioggia.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/raw/Trento/Pressione.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/raw/Trento/Radiazione.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/raw/Trento/Temperatura.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/raw/Trento/Umidità.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/raw/Trento/Velocità.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/make_dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/make_dataset.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
