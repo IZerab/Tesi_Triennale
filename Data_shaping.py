@@ -70,10 +70,11 @@ def Station_Classifier(df):
     """
     # I generate a dict in which each cell is a Dataframe relative to a station
     stat_names = pd.DataFrame(df['Stazione'].unique()).to_numpy()
+    stat_names = np.concatenate(stat_names, axis=0)
     stations = {}
     for col in stat_names:
-        stations[col.item()] = df[df['Stazione'].str.contains(col.item())]
-        stations[col.item()].drop('Stazione', axis='columns', inplace=True)
+        stations[col] = df[df['Stazione'].str.contains(col)]
+        stations[col].drop('Stazione', axis='columns', inplace=True)
     return stations, stat_names
 
 

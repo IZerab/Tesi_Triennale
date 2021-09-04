@@ -74,8 +74,6 @@ def Aquirer(inp):
     data = data.replace('[()]', '', regex=True)
     data.dropna(inplace = True)
 
-    labels = data.columns
-    print("The columns of the data set are: ", labels)
     return data
 
 def Aquirer_meteo(data_path, inp):
@@ -95,9 +93,6 @@ def Aquirer_meteo(data_path, inp):
     labels = data.columns
     print("You just added this feature ", labels[1], "to the DF")
     return data
-
-
-
 
 
 def appforth(df, line):
@@ -130,6 +125,52 @@ def orderstation(weatherdf):
         station_stats.loc[idx]["station"]=stat
         station_stats.loc[idx]["elevation"]=temp.loc[temp.index[0],:]["elevation"]
     return station_stats
+
+
+def pollutants_acronym(pollutants):
+    """
+    It change the names of the pollutants to its acronym, it gives back a string
+    """
+    list_pollutants = []
+    for element in pollutants:
+        list_pollutants.append(etiquette(element))
+    return list_pollutants
+
+
+def etiquette(element):
+    """
+    It change the element of the string to its acronym, it return a char
+    """
+    if element == 'PM10':
+        return "PM10"
+    elif element == 'Biossido di Azoto':
+        return "NO2"
+    elif element == 'Ozono':
+        return "O3"
+    elif element == 'PM2.5':
+        return "PM2_5"
+    elif element == 'Ossido di Carbonio':
+        return "CO"
+    elif element == 'Biossido Zolfo':
+        return "SO2"
+    else:
+        print("Something went wrong in classifying pollutant level!")
+
+def pollutants_names(df):
+    """
+    It extract the names of the matrix from the dataset
+    """
+    poll_names = pd.DataFrame(df['Inquinante'].unique()).to_numpy()
+    return poll_names
+
+
+
+def UM_Normalizer(df):
+    """
+    It normalize the data in order to have the same U.M.
+    """
+    df[df['Unità di misura'].str.contains('mg/mc')].loc[:, 'Valore'].multiply(1000)
+    df.drop(labels="Unità di misura", axis="columns", inplace=True)
 
 
 varconv={0 : "temperatures.", 1 : "precipitations."}
