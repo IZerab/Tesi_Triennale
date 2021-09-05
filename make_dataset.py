@@ -62,18 +62,14 @@ def list_in_directory(mypath):
     return arr
 
 
-def Aquirer(inp):
+def acquirer(file):
     """
-    This function gets data in csv format and cleans them from thing that make the alg crash
+    This function aquires the data from the server, data must be a csv format
     """
-    filename = files[inp][0]
-
-    fl = data_path_in / filename
-    data = pd.read_csv(fl, encoding='latin-1', engine='python', decimal='.')
+    data = pd.read_csv(file, encoding='latin-1', engine='python', decimal='.')
     data.columns = data.columns.str.replace('[()]', '', regex=True)
     data = data.replace('[()]', '', regex=True)
-    data.dropna(inplace = True)
-
+    data.dropna(inplace=True)
     return data
 
 def Aquirer_meteo(data_path, inp):
