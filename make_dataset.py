@@ -191,18 +191,6 @@ def find_Weather(weatherdf, month, day, hour, stationName, varType=0):
     return float(df[cellname])
 
 
-def Wday(month, day):
-    """
-    Function that yields the weekday given the month and the day
-        Works for the year 2013, months 11 and 12
-    """
-    out=["Mo","Tu","We","Th","Fr","Sa","Su"]
-    if(month==11):
-        return out[(4+day)%7]
-    if(month==12):
-        return out[(6+day)%7]
-
-
 def scale(v):
     """
     Funzione che scala un vettore, ovvero sposta l'i-esimo elemento all'i+1-esimo indice
@@ -213,128 +201,27 @@ def scale(v):
     del v[-1]                #Pop back
     return v
 
-def df_reg():
+def temporal_shift(dict, keys):
     """
     Funzione che tratta i dataframe raffinati per produrre un nuovo dataframe atto a fare il machine learning
     Ritorna il dataframe stesso
     Si basa sull'avere i databases nella cartella processed quindi fare attenzione
     """
-    dfTweets=pd.read_csv(data_path_out / "twitter_final.csv")
-    dfTemp=pd.read_csv(data_path_out / "weather_final.csv")
-    dfElectric=pd.read_csv(data_path_out / "electro_final.csv")
+    columns = {}
+    for i in keys:
+        columns[i] = dict[i].columns
+    label_add = [" -1h"," -2h", " -3h", " -4h"]
+    label_shifted = ["", " -1h"," -2h", " -3h"]
 
-    columnsDay=["Tweet1m", "Tweet2m", "Tavg1m", "Tavg2m", "Rainmax1m", "Rainmax2m",
-                    "Rainavg1m", "Rainavg2m", "Electro1m", "Electro2m"]
-    columnsNight = ["Tweet1n", "Tweet2n", "Tavg1n", "Tavg2n", "Rainmax1n", "Rainmax2n",
-                  "Rainavg1n", "Rainavg2n", "Electro1n", "Electro2n"]
-    columns=columnsDay+columnsNight+["Weekday","TargetDay", "TargetNight"]
-
-    out=pd.DataFrame(columns=columns)
-
-    ##Tweets:
-    #NOTA: per ora il numero di tweets non sarà normalizzato ai giorni della settimana
-    TwDay=dfTweets[dfTweets["hours"]>7.9]
-    TwDay=TwDay[TwDay["hours"]<18.9]
-
-    #Questo autosorta e raggruppa per day
-    NtwDay = pd.DataFrame({'Counts': TwDay.groupby(
-        ['month', 'day']).size()}).reset_index()
-    out["TargetDay"]=NtwDay["Counts"]
-
-    TwNight = dfTweets[dfTweets["hours"] > 18.9]
-
-    NtwNight = pd.DataFrame({'Counts': TwNight.groupby(
-        ['month', 'day']).size()}).reset_index()
-    out["TargetNight"] = NtwNight["Counts"]
-
-    #Per l'input dei twwets dei giorni prima, scorro il vettore inputs
-    temp=list(NtwDay["Counts"])
-    out["Tweet1m"]=scale(temp)
-    out["Tweet2m"]=scale(temp)
-
-    temp = list(NtwNight["Counts"])
-    out["Tweet1n"]=scale(temp)
-    out["Tweet2n"]=scale(temp)
-
-    
-    #Weekday
-    """Note: it may be best to normalize the number of tweets to the 
-        individual weekday (as in: renormalizing a temporal serie); 
-        we will treat the weekday as a feature which should be roughly equivalent"""
-    temp=[]
-    for i in [11, 12]:
-        for j in range(0,19+i):
-            temp.append(Wday(i,j))
-    out["Weekday"]=temp
-
-    #Average temperature
-    #The average is computer over all the stations
-    #DAY
-    colTempDay=["date", "temperatures.0900", "temperatures.0915", "temperatures.0930", "temperatures.0945"]+\
-               ["temperatures."+str(int(1000+100*np.floor(i/4)+(i%4)*15)) for i in range(0,36)]
-    #Medio sulle stazioni
-    Tavg = pd.DataFrame(data=dfTemp, columns=colTempDay).groupby("date").mean()
-    #Medio sulla giornata, che qua è rappresentata dalle colonne
-    Tavg=list(Tavg.swapaxes(0,1).mean())
-
-    out["Tavg1m"]=scale(Tavg)
-    out["Tavg2m"]=scale(Tavg)
-
-    #NIGHT
-    colTempNight = ["date"] + ["temperatures." + str(int(1900 + 100 * np.floor(i / 4) + (i % 4) * 15)) for i in range(0, 20)]
-    Tavg = pd.DataFrame(data=dfTemp, columns=colTempNight).groupby("date").mean()
-    Tavg = list(Tavg.swapaxes(0, 1).mean())
-
-    out["Tavg1n"]=scale(Tavg)
-    out["Tavg2n"]=scale(Tavg)
-
-    #Similarly, precipitation, let's also fetch the maximum 
-    #DAY
-    colPrecDay = ["date", "precipitations.0900", "precipitations.0915", "precipitations.0930", "precipitations.0945"] + \
-                 ["precipitations." + str(int(1000 + 100 * np.floor(i / 4) + (i % 4) * 15)) for i in range(0, 36)]
-    Pavg=pd.DataFrame(data=dfTemp, columns=colPrecDay).groupby("date").mean()
-    TopP=pd.DataFrame(data=dfTemp, columns=colPrecDay).groupby("date").max()
-    Pavg = list(Pavg.swapaxes(0, 1).mean())
-    TopP = list(TopP.swapaxes(0, 1).mean())
-
-    out["Rainavg1m"]=scale(Pavg)
-    out["Rainavg2m"]=scale(Pavg)
-    out["Rainmax1m"]=scale(TopP)
-    out["Rainmax2m"]=scale(TopP)
-
-    #NIGHT
-    colPrecNight = ["date"] + ["precipitations." + str(int(1900 + 100 * np.floor(i / 4) + (i % 4) * 15)) for i in range(0, 20)]
-    Pavg = pd.DataFrame(data=dfTemp, columns=colPrecNight).groupby("date").mean()
-    TopP=pd.DataFrame(data=dfTemp, columns=colPrecDay).groupby("date").max()
-    Pavg = list(Pavg.swapaxes(0, 1).mean())
-    TopP = list(TopP.swapaxes(0, 1).mean())
-
-    out["Rainavg1n"]=scale(Pavg)
-    out["Rainavg2n"]=scale(Pavg)
-    out["Rainmax1n"]=scale(TopP)
-    out["Rainmax2n"]=scale(TopP)
-
-    #Electricity
-    ElDay=dfElectric[dfElectric["hours"]>7.9]
-    ElDay=ElDay[ElDay["hours"]<18.9]
-
-    ElNight = dfElectric[dfElectric["hours"] > 18.9]
-
-    #Vogliamo consumo (in amp) attraverso tutta la giornata
-    #Dati lasciati a leggera interpretazione, credo che sommare su tutte le lines dia consumo netto territorio
-        #Qui facciamo quello
-    ElDayT  =list(  ElDay.groupby(["month", "day"])["Value Amp"].sum())
-    ElNightT=list(ElNight.groupby(["month", "day"])["Value Amp"].sum())
-
-    out["Electro1m"]=scale(ElDayT)
-    out["Electro2m"]=scale(ElDayT)
-    out["Electro1n"]=scale(ElNightT)
-    out["Electro2n"]=scale(ElNightT)
-
-    out.drop(index=[0, 1], inplace=True)
-    out.reset_index(inplace=True)
-    out.drop(columns="index", inplace=True)
-    return out
+    for i in keys:
+        for k in columns[i]:
+            counter = 0
+            if (k != "Year" and k != "Hour" and k != "Month" and k != "Day"):
+                for j in label_add:
+                    h = label_shifted[counter]
+                    dict[i][k + j] = scale(list(dict[i].loc[:,k + h]))
+                    counter = counter + 1
+    return dict
 
 
 
