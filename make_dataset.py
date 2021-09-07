@@ -224,6 +224,33 @@ def temporal_shift(dict, keys):
     return dict
 
 
+def corr_shift(dict, keys):
+    """
+    Funzione che tratta i dataframe raffinati per produrre un nuovo dataframe atto a fare il machine learning
+    Ritorna il dataframe stesso
+    Si basa sull'avere i databases nella cartella processed quindi fare attenzione
+    """
+    columns = {}
+    for i in keys:
+        columns[i] = dict[i].columns
+    label_add = [" -1h"," -2h", " -3h", " -4h"," -5h", " -6h", "- 7h", "- 8h", "- 9h", "- 10h", "- 11h", "- 12h",
+                 "- 13h", "- 14h", "- 15h", "- 16h", " - 17h", "- 18h", " -19h", " -20h", " -21h", " -22h", " -23h",
+                 " -24h"]
+    label_shifted = ["", " -1h"," -2h", " -3h"," -4h"," -5h", " -6h", "- 7h", "- 8h", "- 9h", "- 10h", "- 11h","- 12h",
+                 "- 13h", "- 14h", "- 15h","- 16h", " - 17h", "- 18h", " -19h", " -20h", " -21h", " -22h", " -23h"]
+
+    for i in keys:
+        for k in columns[i]:
+            if k == "O3":
+                counter = 0
+                if (k != "Year" and k != "Hour" and k != "Month" and k != "Day"):
+                    for j in label_add:
+                        h = label_shifted[counter]
+                        dict[i][k + j] = scale(list(dict[i].loc[:,k + h]))
+                        counter = counter + 1
+    return dict
+
+
 
 
 
