@@ -16,8 +16,7 @@ data_path_pollutants = Path('data/raw/Inquinanti')
 data_path_meteo = Path('data/raw/Meteo')
 
 data_path_out = Path('data/processed')
-
-#models_path = Path('models')
+models_path = Path('models')
 
 files = {'grid':['trentino_grid.geojson',"geojson"],
         'rain':['Pioggia.csv',"csv"],
@@ -201,11 +200,12 @@ def scale(v):
     del v[-1]                #Pop back
     return v
 
-def temporal_shift(dict, keys):
+def temporal_shift_hours(dict, keys):
     """
     Funzione che tratta i dataframe raffinati per produrre un nuovo dataframe atto a fare il machine learning
     Ritorna il dataframe stesso
     Si basa sull'avere i databases nella cartella processed quindi fare attenzione
+    Lo shift temporale per avere la serie temporale è di 4 ore
     """
     columns = {}
     for i in keys:
@@ -220,6 +220,40 @@ def temporal_shift(dict, keys):
                 for j in label_add:
                     h = label_shifted[counter]
                     dict[i][k + j] = scale(list(dict[i].loc[:,k + h]))
+                    counter = counter + 1
+    return dict
+
+def scale_day(v):
+    """
+    Funzione che scala un vettore, ovvero sposta l'i-esimo elemento all'i+1-esimo indice
+    Elimina l'ultimo elemento della sequenza, e mette -1000 nel primo (per i nostri scopi è comodo così)
+    Ritorna il vettore scalato
+    """
+    for i in range(0,24):
+        v.insert(0, -1000)       #Insert front
+        del v[-1]                #Pop back
+    return v
+
+def temporal_shift_days(dict, keys):
+    """
+    Funzione che tratta i dataframe raffinati per produrre un nuovo dataframe atto a fare il machine learning
+    Ritorna il dataframe stesso
+    Si basa sull'avere i databases nella cartella processed quindi fare attenzione
+    Lo shift temporale per avere la serie temporale è di 3 giorni
+    """
+    columns = {}
+    for i in keys:
+        columns[i] = dict[i].columns
+    label_add = [" -1d"," -2d", " -3d"," -4d", " -5d", " -6d", " -7d"]
+    label_shifted = ["", " -1d"," -2d", " -3d"," -4d", " -5d", " -6d"]
+
+    for i in keys:
+        for k in columns[i]:
+            counter = 0
+            if (k != "Year" and k != "Hour" and k != "Month" and k != "Day"):
+                for j in label_add:
+                    h = label_shifted[counter]
+                    dict[i][k + j] = scale_day(list(dict[i].loc[:,k + h]))
                     counter = counter + 1
     return dict
 

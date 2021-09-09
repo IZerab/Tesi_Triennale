@@ -2,12 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="588e50e0-f1e8-4d48-b00a-d1b958376b63" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Plots/Borgo Valsugana_correlations.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Plots/Monte Gaza_correlations.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Plots/Parco S. Chiara_correlations.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Plots/Piana Rotaliana_correlations.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Plots/Riva del Garda_correlations.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Plots/Rovereto_correlations.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ML_functions.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ML_run.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/O3_VS_NO2_seasonal.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Untitled3.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Untitled3.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/make_dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/make_dataset.py" afterDir="false" />
